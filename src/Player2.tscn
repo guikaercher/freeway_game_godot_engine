@@ -1,0 +1,53 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assets/galinha/baixo/sprite_0.png" type="Texture" id=1]
+[ext_resource path="res://assets/galinha/cima/sprite_2.png" type="Texture" id=2]
+[ext_resource path="res://assets/galinha/cima/sprite_0.png" type="Texture" id=3]
+[ext_resource path="res://assets/galinha/baixo/sprite_1.png" type="Texture" id=4]
+[ext_resource path="res://assets/galinha/baixo/sprite_2.png" type="Texture" id=5]
+[ext_resource path="res://assets/galinha/cima/sprite_1.png" type="Texture" id=6]
+[ext_resource path="res://assets/sons/colide.wav" type="AudioStream" id=7]
+[ext_resource path="res://Player2.gd" type="Script" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 6 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "cima",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "baixo",
+"speed": 5.0
+} ]
+
+[sub_resource type="GDScript" id=2]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 51.0179
+
+[sub_resource type="GDScript" id=4]
+
+[sub_resource type="GDScript" id=5]
+
+[node name="Player2" type="Area2D"]
+script = ExtResource( 8 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -540.973, -192.112 )
+frames = SubResource( 1 )
+animation = "cima"
+offset = Vector2( 540.973, 192.112 )
+script = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.478516, 14.4828 )
+shape = SubResource( 3 )
+script = SubResource( 4 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+script = SubResource( 5 )
+
+[connection signal="body_entered" from="." to="." method="_on_Player2_body_entered"]
